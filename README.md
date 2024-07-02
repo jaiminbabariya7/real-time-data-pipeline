@@ -1,7 +1,7 @@
 ---
-title: "Project 1: Real Time Data PIpeline with Python"
-author: "Jaimin Babariya"
-date: "`r Sys.Date()`"
+Title: "Project 1: Real Time Data PIpeline with Python"
+Author: "Jaimin Babariya"
+Date: "`Tue 2 Jul 2024`"
 ---
 
 # Introduction
