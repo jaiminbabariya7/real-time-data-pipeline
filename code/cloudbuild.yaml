@@ -10,10 +10,8 @@ steps:
   # Step 2: Copy files to Composer's DAGs folder in GCS
   - name: 'gcr.io/cloud-builders/gsutil'
     args:
-      #- '-m'
       - 'cp'
       - '-r'
-      #- 'https://github.com/jaiminbabariya7/real-time-data-pipeline/code/*'
       - '/code/'
       - 'gs://northamerica-northeast2-air-f8499eb4-bucket/dags/'
 
