@@ -13,7 +13,7 @@ steps:
       - '-m'
       - 'cp'
       - '-r'
-      - '/code/*'
+      - 'https://github.com/jaiminbabariya7/real-time-data-pipeline/code/*'
       - 'gs://northamerica-northeast2-air-f8499eb4-bucket/dags/'
 
 # Timeout setting in seconds
