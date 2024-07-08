@@ -1,0 +1,11 @@
+steps:
+  # Step 1: Clone the GitHub repository
+  - name: 'gcr.io/cloud-builders/git'
+    args: ['clone', '--single-branch', '--branch', 'main', 'https://github.com/jaiminbabariya7/real-time-data-pipeline.git', '/code']
+
+  # Step 2: Copy files to Composer's DAGs folder in GCS
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['-m', 'cp', '/code/*', 'gs://northamerica-northeast2-air-f8499eb4-bucket/dags/']
+
+# Timeout setting in seconds
+timeout: '1200s'
