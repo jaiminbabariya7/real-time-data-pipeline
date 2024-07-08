@@ -11,4 +11,4 @@ steps:
 timeout: '1200s'
 
 options:
-  logging: CLOUD_BUILD_ONLY
+  logging: LEGACY
