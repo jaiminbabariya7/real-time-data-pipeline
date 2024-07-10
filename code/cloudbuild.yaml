@@ -2,7 +2,7 @@ steps:
   # Step 1: Clone the GitHub repository
   - name: 'gcr.io/cloud-builders/git'
     entrypoint: 'bash'
-    args: ['clone', 'https://github.com/jaiminbabariya7/real-time-data-pipeline.git', '/workspace/real-time-data-pipeline']
+    args: ['clone', 'https://github.com/jaiminbabariya7/real-time-data-pipeline.git/code/', '/workspace/real-time-data-pipeline']
 
   # Step 2: Copy files to Composer's DAGs folder in GCS
   - name: 'gcr.io/cloud-builders/gsutil'
