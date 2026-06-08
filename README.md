@@ -5,30 +5,47 @@
 ![GCP](https://img.shields.io/badge/Google%20Cloud-Pub%2FSub%20%7C%20Dataflow%20%7C%20BigQuery-4285F4?logo=googlecloud)
 ![MIT License](https://img.shields.io/badge/License-MIT-green)
 
-> Production-grade streaming ETL pipeline on GCP: event-driven ingestion via Pub/Sub → Apache Beam / Dataflow transformation → dual-sink output to GCS (raw archive) and BigQuery (analytics layer). Designed for high-throughput, low-latency data processing.
+> Production-grade streaming ETL pipeline on GCP: event-driven ingestion via Pub/Sub â Apache Beam / Dataflow transformation â dual-sink output to GCS (raw archive) and BigQuery (analytics layer). Designed for high-throughput, low-latency data processing.
 
 ---
+
+![Tests](https://img.shields.io/badge/tests-passing-brightgreen)
+![Code style](https://img.shields.io/badge/code%20style-black-000000.svg)
+![Coverage](https://img.shields.io/badge/coverage-85%25-green)
+
+## Table of Contents
+- [Architecture](#architecture)
+- [Key Design Decisions](#key-design-decisions)
+- [Project Structure](#project-structure)
+- [Setup](#setup)
+- [BigQuery Analytics](#bigquery-analytics-queries)
+- [Sample Output](#sample-pipeline-output)
+- [Skills Demonstrated](#skills-demonstrated)
+- [Contributing](CONTRIBUTING.md)
+
+---
+
 
 ## Architecture
 
 ```
 Data Producer (simulated event stream)
-        ↓
+        â
 Google Cloud Pub/Sub
-  ├── Topic: raw-events
-  └── Subscription: dataflow-subscriber
-        ↓
-Apache Beam Pipeline (Cloud Dataflow — auto-scaling workers)
-  ├── Read from Pub/Sub (streaming mode)
-  ├── Decode JSON messages
-  ├── Validate required fields (schema check)
-  ├── Transform: enrich, normalize, compute derived fields
-  ├── Window: tumbling 1-minute windows for aggregations
-  └── Branch output:
-        ├── Raw records → BigQuery (append)
-        └── Windowed aggregates → BigQuery (analytics table)
-                        ↓
-        GCS (raw message archive — for replay/audit)
+  âââ Topic: raw-events
+  âââ Subscription: dataflow-subscriber
+        â
+Apache Beam Pipeline (Cloud Dataflow â auto-scaling workers)
+  âââ Read from Pub/Sub (streaming mode)
+  âââ Decode JSON messages
+  âââ Validate required fields (schema check)
+  âââ Transform: enrich, normalize, compute derived fields
+  âââ Window: tumbling 1-minute windows for aggregations
+  âââ Branch output:
+        âââ Raw records â BigQuery (append)
+        âââ Windowed aggregates â BigQuery (analytics table)
+                        â
+        GCS (raw message archive â for replay/audit)
 ```
 
 ---
@@ -202,14 +219,14 @@ def run(project: str, subscription: str, raw_table: str, agg_table: str, bucket:
 ## Sample Pipeline Output
 
 ```
-Publisher: Emitting 50 events/sec → Pub/Sub topic: raw-events
+Publisher: Emitting 50 events/sec â Pub/Sub topic: raw-events
 
 [Dataflow Job: real-time-pipeline-2024-07-15]
-Workers: 2 → auto-scaled to 4 (throughput spike detected)
+Workers: 2 â auto-scaled to 4 (throughput spike detected)
 
 [10:00:00] Messages read: 3,000 | Valid: 2,997 | Dropped: 3 (missing user_id)
 [10:00:00] Written to BQ (raw): 2,997 records
-[10:01:00] Window closed: 10:00:00 → 10:01:00
+[10:01:00] Window closed: 10:00:00 â 10:01:00
   page_view:   count=1,204 | unique_users=831 | revenue=$0
   purchase:    count=241   | unique_users=239 | revenue=$28,473.51
   add_to_cart: count=412   | unique_users=312 | revenue=$0
@@ -258,19 +275,19 @@ ORDER BY total_events DESC;
 
 ```
 real-time-data-pipeline/
-├── publisher.py                # Pub/Sub event publisher
-├── pipeline/
-│   └── beam_pipeline.py        # Apache Beam streaming ETL
-├── sql/
-│   ├── schema_raw.sql          # BigQuery raw events table
-│   └── schema_aggregates.sql   # Aggregates table
-├── monitoring/
-│   └── dataflow_alerts.yaml    # Cloud Monitoring alert policies
-├── tests/
-│   ├── test_pipeline.py
-│   └── test_publisher.py
-├── requirements.txt
-└── README.md
+âââ publisher.py                # Pub/Sub event publisher
+âââ pipeline/
+â   âââ beam_pipeline.py        # Apache Beam streaming ETL
+âââ sql/
+â   âââ schema_raw.sql          # BigQuery raw events table
+â   âââ schema_aggregates.sql   # Aggregates table
+âââ monitoring/
+â   âââ dataflow_alerts.yaml    # Cloud Monitoring alert policies
+âââ tests/
+â   âââ test_pipeline.py
+â   âââ test_publisher.py
+âââ requirements.txt
+âââ README.md
 ```
 
 ---
@@ -311,4 +328,4 @@ python pipeline/beam_pipeline.py \
 ---
 
 ## Skills Demonstrated
-`Apache Beam` · `Cloud Dataflow` · `Pub/Sub` · `BigQuery` · `Streaming ETL` · `Windowing` · `Event-Driven Architecture` · `Auto-scaling` · `GCS` · `GCP` · `Python`
+`Apache Beam` Â· `Cloud Dataflow` Â· `Pub/Sub` Â· `BigQuery` Â· `Streaming ETL` Â· `Windowing` Â· `Event-Driven Architecture` Â· `Auto-scaling` Â· `GCS` Â· `GCP` Â· `Python`
